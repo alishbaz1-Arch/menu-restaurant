@@ -31,9 +31,12 @@ export default function ModelViewer({ modelUrl, onClose }: ModelViewerProps) {
     <div style={{
       position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
       backgroundColor: "rgba(0,0,0,0.85)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      zIndex: 50, padding: "16px"
+      display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center",
+      zIndex: 50, padding: "16px", gap: "12px"
     }}>
+
+      {/* 3D Viewer Box */}
       <div style={{
         backgroundColor: "#111827",
         borderRadius: "16px",
@@ -43,7 +46,6 @@ export default function ModelViewer({ modelUrl, onClose }: ModelViewerProps) {
         border: "1px solid #374151",
         position: "relative"
       }}>
-
         <button onClick={onClose} style={{
           position: "absolute", top: "12px", right: "12px",
           background: "none", border: "none", color: "#9CA3AF",
@@ -54,7 +56,7 @@ export default function ModelViewer({ modelUrl, onClose }: ModelViewerProps) {
           Drag to rotate • Scroll to zoom
         </p>
 
-        <div style={{ width: "100%", height: "220px", borderRadius: "12px", overflow: "hidden", marginBottom: "12px" }}>
+        <div style={{ width: "100%", height: "220px", borderRadius: "12px", overflow: "hidden" }}>
           <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
             <ambientLight intensity={0.8} />
             <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -65,30 +67,32 @@ export default function ModelViewer({ modelUrl, onClose }: ModelViewerProps) {
             <OrbitControls enableZoom={true} autoRotate autoRotateSpeed={2} />
           </Canvas>
         </div>
-
-        
-          href={`https://arvr.google.com/scene-viewer/1.0?file=${fullUrl}&mode=ar_preferred`}
-          rel="ar"
-          style={{
-            display: "block",
-            width: "100%",
-            backgroundColor: "#FB923C",
-            color: "#000",
-            fontWeight: "bold",
-            padding: "14px",
-            borderRadius: "12px",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "14px",
-            textAlign: "center",
-            textDecoration: "none",
-            boxSizing: "border-box"
-          }}
-        >
-          View on Your Table (AR)
-        </a>
-
       </div>
+
+      {/* AR Button — outside the box */}
+      
+        href={`https://arvr.google.com/scene-viewer/1.0?file=${fullUrl}&mode=ar_preferred`}
+        rel="ar"
+        style={{
+          display: "block",
+          width: "100%",
+          maxWidth: "360px",
+          backgroundColor: "#FB923C",
+          color: "#000",
+          fontWeight: "bold",
+          padding: "16px",
+          borderRadius: "12px",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "16px",
+          textAlign: "center",
+          textDecoration: "none",
+          boxSizing: "border-box"
+        }}
+      >
+        View on Your Table (AR)
+      </a>
+
     </div>
   );
 }
